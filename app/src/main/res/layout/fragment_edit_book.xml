@@ -39,6 +39,7 @@
             android:layout_marginTop="15dp"
             android:background="@drawable/ed_shape"
             android:hint="Book name"
+            android:fontFamily="@font/c"
             android:padding="19dp"
             android:textColor="@color/black"
             android:textColorHint="#878686" />
@@ -50,6 +51,7 @@
             android:layout_marginTop="15dp"
             android:background="@drawable/ed_shape"
             android:hint="Book author"
+            android:fontFamily="@font/c"
             android:padding="19dp"
             android:textColor="@color/black"
             android:textColorHint="#878686" />
@@ -62,6 +64,7 @@
             android:layout_marginTop="15dp"
             android:background="@drawable/ed_shape"
             android:hint="Launch year"
+            android:fontFamily="@font/c"
             android:inputType="date"
             android:maxLength="4"
             android:padding="19dp"
@@ -75,6 +78,7 @@
             android:layout_marginTop="15dp"
             android:background="@drawable/ed_shape"
             android:hint="Price"
+            android:fontFamily="@font/c"
             android:inputType="number"
             android:padding="15dp"
             android:textColor="@color/black"
