@@ -71,7 +71,6 @@ class EditBookFragment : Fragment() {
 
         //region Update Button
         binding.btnEditBook.setOnClickListener {
-            val mBook = getOldBookData()
             val mNewBookMap = getNewBooksData()
 
             MaterialAlertDialogBuilder(
@@ -85,7 +84,7 @@ class EditBookFragment : Fragment() {
                     dialog.dismiss()
                 }
                 .setPositiveButton("Yes") { _, _ ->
-                    updateBookData(mBook, mNewBookMap)
+                    updateBookData(mNewBookMap)
                 }
                 .setIcon(R.drawable.ic_edit_book)
 
@@ -97,7 +96,6 @@ class EditBookFragment : Fragment() {
 
         //region Delete Button
         binding.btnDeleteBook.setOnClickListener {
-            val mBook = getOldBookData()
 
             MaterialAlertDialogBuilder(
                 requireActivity(),
@@ -110,24 +108,13 @@ class EditBookFragment : Fragment() {
                 }
                 .setPositiveButton("Yes") { _, _ ->
                     binding.progressBar.visibility = View.VISIBLE
-                    deleteBookData(mBook)
+                    deleteBookData()
                 }
                 .setIcon(R.drawable.ic_delete_book)
 
                 .show()
         }
         //endregion
-    }
-
-    private fun getOldBookData(): Book {
-        val idBook = books.bookId
-        val bookName = books.bookName
-        val bookAuthor = books.bookAuthor
-        val launchYear = books.launchYear
-        val price = books.price
-        val rate = books.rate
-
-        return Book(idBook, bookName, bookAuthor, launchYear, price, rate)
     }
 
     private fun getNewBooksData(): Map<String, Any> {
@@ -159,8 +146,8 @@ class EditBookFragment : Fragment() {
         return map
     }
 
-    private fun deleteBookData(book: Book) {
-        bookCollectionRef.document(book.bookId).delete().addOnCompleteListener { task ->
+    private fun deleteBookData() {
+        bookCollectionRef.document(books.bookId).delete().addOnCompleteListener { task ->
             if (task.isSuccessful) {
                 Banner.make(
                     binding.root, requireActivity(), Banner.SUCCESS,
@@ -179,8 +166,8 @@ class EditBookFragment : Fragment() {
         }
     }
 
-    private fun updateBookData(book: Book, newBookMap: Map<String, Any>) {
-        bookCollectionRef.whereEqualTo("bookId", book.bookId)
+    private fun updateBookData(newBookMap: Map<String, Any>) {
+        bookCollectionRef.whereEqualTo("bookId", books.bookId)
             .get()
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
