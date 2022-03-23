@@ -85,7 +85,7 @@ class EditBookFragment : Fragment() {
                     dialog.dismiss()
                 }
                 .setPositiveButton("Yes") { _, _ ->
-                    updateBookDate(mBook, mNewBookMap)
+                    updateBookData(mBook, mNewBookMap)
                 }
                 .setIcon(R.drawable.ic_edit_book)
 
@@ -110,7 +110,7 @@ class EditBookFragment : Fragment() {
                 }
                 .setPositiveButton("Yes") { _, _ ->
                     binding.progressBar.visibility = View.VISIBLE
-                    deleteBookDate(mBook)
+                    deleteBookData(mBook)
                 }
                 .setIcon(R.drawable.ic_delete_book)
 
@@ -159,7 +159,7 @@ class EditBookFragment : Fragment() {
         return map
     }
 
-    private fun deleteBookDate(book: Book) {
+    private fun deleteBookData(book: Book) {
         bookCollectionRef.document(book.bookId).delete().addOnCompleteListener { task ->
             if (task.isSuccessful) {
                 Banner.make(
@@ -179,7 +179,7 @@ class EditBookFragment : Fragment() {
         }
     }
 
-    private fun updateBookDate(book: Book, newBookMap: Map<String, Any>) {
+    private fun updateBookData(book: Book, newBookMap: Map<String, Any>) {
         bookCollectionRef.whereEqualTo("bookId", book.bookId)
             .get()
             .addOnCompleteListener { task ->
